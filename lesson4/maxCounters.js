@@ -1,11 +1,13 @@
+const _ = require('lodash');
+
 function solution(N, A) {
-  let R   = new Array(N); 
+  let R   = {}; 
   let max = 0;
-  let floor = 0; 
+  let floor = 0;
   
   for(let i = 0; i < A.length; i++) {
     if (A[i] === N + 1) {
-      R = new Array(N);
+      R = {};
       floor = max;
     } else {
       let newVal = -1;
@@ -23,18 +25,22 @@ function solution(N, A) {
     }
   }
 
-  for(let i = 0; i < R.length; i++) {
+  let result = new Array(N);
+  for(let i = 0; i < result.length; i++) {
     if(R[i]) {
-      R[i] = R[i] + floor;
+      result[i] = R[i] + floor;
     } else {
-      R[i] = floor;
+      result[i] = floor;
     }
   }
 
-  return R;
+  return result;
 }
 
 console.log('5, [3, 4, 4, 6, 1, 4, 4]: ', solution(5, [3, 4, 4, 6, 1, 4, 4]));
 console.log('1, [1]: ', solution(1, [1]));
+console.log('1, [2]: ', solution(1, [2]));
+console.log('999999, [1000000, 1000000, 1000000, 1000000]: ', solution(999999, _.fill(new Array(1000), 1000000)));
+
 
 
